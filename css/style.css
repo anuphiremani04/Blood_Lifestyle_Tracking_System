@@ -1,0 +1,432 @@
+/* Smooth Page Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 25%, #c92a2a 50%, #a61e4d 75%, #862e9c 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Page transition effect */
+.page-transition {
+    animation: pageFadeIn 0.6s ease-in-out;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Neon Glow Effects */
+.neon-glow {
+    transition: all 0.3s ease;
+}
+
+.neon-glow:hover {
+    box-shadow: 
+        0 0 10px rgba(220, 53, 69, 0.5),
+        0 0 20px rgba(220, 53, 69, 0.4),
+        0 0 30px rgba(220, 53, 69, 0.3),
+        0 0 40px rgba(220, 53, 69, 0.2);
+    transform: translateY(-3px);
+}
+
+.neon-glow:active {
+    box-shadow: 
+        0 0 15px rgba(220, 53, 69, 0.8),
+        0 0 30px rgba(220, 53, 69, 0.6),
+        0 0 45px rgba(220, 53, 69, 0.4),
+        0 0 60px rgba(220, 53, 69, 0.3);
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Button Neon Effects */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    box-shadow: 
+        0 0 10px rgba(220, 53, 69, 0.6),
+        0 0 20px rgba(220, 53, 69, 0.5),
+        0 0 30px rgba(220, 53, 69, 0.4),
+        0 0 40px rgba(220, 53, 69, 0.3);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    box-shadow: 
+        0 0 15px rgba(220, 53, 69, 0.9),
+        0 0 30px rgba(220, 53, 69, 0.7),
+        0 0 45px rgba(220, 53, 69, 0.5),
+        0 0 60px rgba(220, 53, 69, 0.4);
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Card Neon Effects */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 
+        0 0 15px rgba(220, 53, 69, 0.4),
+        0 0 30px rgba(220, 53, 69, 0.3),
+        0 0 45px rgba(220, 53, 69, 0.2),
+        0 10px 40px rgba(220, 53, 69, 0.2);
+    transform: translateY(-5px);
+}
+
+.card:active {
+    box-shadow: 
+        0 0 20px rgba(220, 53, 69, 0.6),
+        0 0 40px rgba(220, 53, 69, 0.4),
+        0 0 60px rgba(220, 53, 69, 0.3);
+    transform: translateY(-2px) scale(0.99);
+}
+
+/* Link Neon Effects */
+a {
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-shadow: 
+        0 0 5px rgba(220, 53, 69, 0.8),
+        0 0 10px rgba(220, 53, 69, 0.6),
+        0 0 15px rgba(220, 53, 69, 0.4);
+}
+
+a:active {
+    text-shadow: 
+        0 0 8px rgba(220, 53, 69, 1),
+        0 0 15px rgba(220, 53, 69, 0.8),
+        0 0 20px rgba(220, 53, 69, 0.6);
+}
+
+/* Input Field Neon Effects */
+.form-control {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    box-shadow: 
+        0 0 5px rgba(220, 53, 69, 0.5),
+        0 0 10px rgba(220, 53, 69, 0.4),
+        0 0 15px rgba(220, 53, 69, 0.3),
+        0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    border-color: #dc3545;
+}
+
+/* Table Row Neon Effects */
+tr {
+    transition: all 0.3s ease;
+}
+
+tr:hover {
+    box-shadow: 
+        0 0 10px rgba(220, 53, 69, 0.3),
+        0 0 20px rgba(220, 53, 69, 0.2);
+    background-color: rgba(220, 53, 69, 0.05) !important;
+}
+
+/* Nav Link Neon Effects */
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    text-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.nav-link:active {
+    text-shadow: 
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+/* Back Button Styles */
+.back-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.back-button:hover {
+    box-shadow: 
+        0 0 15px rgba(220, 53, 69, 0.6),
+        0 0 30px rgba(220, 53, 69, 0.4),
+        0 8px 20px rgba(220, 53, 69, 0.3);
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #c92a2a 0%, #a61e4d 100%);
+}
+
+.back-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.back-button:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 0 20px rgba(220, 53, 69, 0.8),
+        0 0 40px rgba(220, 53, 69, 0.5);
+}
+
+.back-button i {
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover i {
+    transform: translateX(-5px);
+}
+
+.cont{
+    padding-top: 40px;
+    text-align: justify;
+    font-size: 1em;
+}
+
+.fas{
+    color: #dc3545; 
+}
+
+.card ,nav, .footer,tr,video{
+    border-radius: 3px;
+    transition: all 200ms ease-out;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+}
+
+/* Red gradient backgrounds for cards */
+.card {
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #dc3545 0%, #c92a2a 100%);
+    color: white;
+    border-bottom: 2px solid #a61e4d;
+}
+
+tr,th,td{
+    border:0.1px solid silver;
+    text-align: center;
+}
+
+.nav-item{
+margin-left: 10px; 
+}
+
+.navbar-brand{
+    text-shadow: 1px 1px 2px red, 0 0 50px black, 0 0 5px white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 1.7em;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.brand{
+    text-shadow: 1px 1px 2px red, 0 0 50px black, 0 0 5px white;
+}
+
+.rounded-circle{
+    margin-top: -2.5px;
+}
+
+.card-header{
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
+.dark-mode {
+  background-color: black;
+  color: black;
+}
+
+form{
+    padding-top: 20px;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.footer{
+    padding: 14px;
+}
+
+.alert{
+    border:1px solid #28a745;
+    border-left: 5px solid #28a745;
+    border-right: 5px solid #28a745;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.error{
+    border:1px solid #dc3545;
+    border-left: 5px solid #dc3545;
+    border-right: 5px solid #dc3545;
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+}
+
+/* Red-themed button styles */
+.btn-primary {
+    background: linear-gradient(135deg, #dc3545 0%, #c92a2a 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #c92a2a 0%, #a61e4d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c92a2a 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c92a2a 0%, #a61e4d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-light {
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+    background: linear-gradient(135deg, #dc3545 0%, #c92a2a 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+/* Navigation hover effects */
+.nav-link {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #dc3545 !important;
+    transform: translateY(-2px);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: linear-gradient(135deg, #dc3545 0%, #c92a2a 100%);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Navbar button hover effects */
+.navbar .btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.navbar .btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.navbar .btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 20px rgba(220, 53, 69, 0.5);
+}
+

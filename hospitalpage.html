@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,700" rel="stylesheet"/>
+    <title>Hospital/Clinic</title>
+    <style>
+      * {
+        margin:0;
+        padding:0;
+      }
+      body{
+        font-family: "Dosis", sans-serif;
+        width:100%;
+        min-height:100vh;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 25%, #c92a2a 50%, #a61e4d 75%, #862e9c 100%);
+        background-attachment: fixed;
+        animation: fadeIn 0.6s ease-in;
+        padding-bottom: 50px;
+      }
+      .navbar{
+        width:320px;
+        height:100%;
+        background: linear-gradient(135deg, #c92a2a 0%, #a61e4d 50%, #862e9c 100%);
+        position:fixed;
+        top:0;
+        right:-320px;
+        display:flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        border-radius:20% 0 0 40%;
+        transition: right 0.8s cubic-bezier(1, 0, 0, 1);
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+        padding-top: 80px;
+        overflow-y: auto;
+        z-index: 1000;
+      }
+      
+      .navbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      .navbar::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+      
+      .navbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+      }
+      
+      .navbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .change{
+        right:0;
+      }
+
+      .hamburger-menu{
+        width:35px;
+        height:30px;
+        
+        position:fixed;
+        top:50px;
+        right:50px;
+        cursor:pointer;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      .line{
+        width:100%;
+        height:3px;
+        background: linear-gradient(135deg, #dc3545 0%, #c92a2a 100%);
+        transition: all 0.8s;
+        box-shadow: 0 2px 5px rgba(220, 53, 69, 0.5);
+      }
+
+      .change .line-1{
+        transform:rotateZ(-405deg) translate(-8px, 6px);
+      }
+      .change .line-2{
+        opacity:0;
+      }
+       .change .line-3{
+        transform:rotateZ(405deg) translate(-8px, -6px);
+      }
+
+      .nav-list{
+        text-align: left;
+        width: 100%;
+        padding: 30px 0;
+      }
+
+      .nav-item{
+        list-style: none;
+        margin: 12px 0;
+        padding: 0 25px;
+      }
+
+      .nav-link{
+        text-decoration: none;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        position: relative;
+        padding: 18px 25px;
+        display: flex;
+        align-items: center;
+        border-radius: 15px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+      
+      .nav-link:hover::before {
+        left: 100%;
+      }
+
+      .nav-link i {
+        margin-right: 18px;
+        font-size: 22px;
+        width: 28px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+        padding: 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .nav-link:hover {
+        color: #ffffff !important;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+        transform: translateX(-12px) scale(1.02);
+        box-shadow: 
+          0 0 25px rgba(255, 255, 255, 0.4),
+          0 0 50px rgba(255, 255, 255, 0.2),
+          0 8px 25px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      
+      .nav-link:hover i {
+        transform: scale(1.15) rotate(-5deg);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.3) 100%);
+        box-shadow: 
+          0 0 15px rgba(255, 255, 255, 0.6),
+          0 4px 12px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      }
+      
+      .nav-link:active {
+        transform: translateX(-10px) scale(0.98);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
+        box-shadow: 
+          0 0 30px rgba(255, 255, 255, 0.5),
+          0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+      
+      .nav-link span {
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-link:hover span {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      }
+      
+      /* Back Button Styles */
+      .back-button {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .back-button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+      
+      .back-button:hover {
+        box-shadow: 
+          0 0 15px rgba(220, 53, 69, 0.6),
+          0 0 30px rgba(220, 53, 69, 0.4),
+          0 8px 20px rgba(220, 53, 69, 0.3);
+        transform: translateY(-3px);
+        background: linear-gradient(135deg, #c92a2a 0%, #a61e4d 100%);
+      }
+      
+      .back-button:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+      
+      .back-button:active {
+        transform: translateY(-1px) scale(0.98);
+        box-shadow: 
+          0 0 20px rgba(220, 53, 69, 0.8),
+          0 0 40px rgba(220, 53, 69, 0.5);
+      }
+      
+      .back-button-nav {
+        background: linear-gradient(135deg, rgba(220, 53, 69, 0.3) 0%, rgba(201, 42, 42, 0.3) 100%) !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        font-weight: 700 !important;
+      }
+      
+      .back-button-nav:hover {
+        background: linear-gradient(135deg, rgba(220, 53, 69, 0.5) 0%, rgba(201, 42, 42, 0.5) 100%) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+        box-shadow: 
+          0 0 20px rgba(255, 255, 255, 0.3),
+          0 0 40px rgba(220, 53, 69, 0.2),
+          0 5px 15px rgba(0, 0, 0, 0.3) !important;
+      }
+      
+      .back-button-nav i {
+        transition: transform 0.3s ease;
+      }
+      
+      .back-button-nav:hover i {
+        transform: translateX(-5px);
+      }
+    </style>
+
+  </head>
+  <body class="page-transition">
+    <nav>
+      <div class="container">
+        <h1 style="border:5px solid #dc3545; font-size: 35px; background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); color: #dc3545; text-transform: uppercase; text-align: center; border-radius:15px; margin: 20px auto; max-width: 600px; padding: 15px; box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3); font-weight: bold;">Hospital/Clinic Dashboard</h1>
+      </div>
+    </nav>
+    
+    <!-- Main Content Section -->
+    <div class="container" style="margin-top: 50px; padding: 0 20px;">
+      <div class="hero-section" style="text-align: center; margin-bottom: 60px; padding: 40px 20px;">
+        <h2 style="font-size: 3.5rem; color: white; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);">
+          Manage smarter. Save lives better.
+        </h2>
+        <p style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.95); max-width: 800px; margin: 0 auto; line-height: 1.8; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);">
+          Blood Lifestyle Tracking System helps hospitals manage blood inventory efficiently, connect with donors, and handle blood requests seamlessly. Fast, reliable, and life-saving.
+        </p>
+      </div>
+
+      <!-- Feature Cards Section -->
+      <div class="row" style="margin-bottom: 60px;">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card feature-card neon-glow" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 245, 245, 0.95) 100%); border-radius: 20px; padding: 30px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); height: 100%; cursor: pointer;">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <i class="fas fa-tint" style="font-size: 4rem; color: #dc3545; margin-bottom: 15px; transition: all 0.3s ease;"></i>
+            </div>
+            <h3 style="color: #dc3545; font-weight: bold; margin-bottom: 15px; text-align: center;">Blood Inventory</h3>
+            <p style="color: #333; line-height: 1.6; text-align: center;">Manage your blood stock efficiently. Add, track, and monitor blood samples in real-time with our intuitive system.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card feature-card neon-glow" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 245, 245, 0.95) 100%); border-radius: 20px; padding: 30px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); height: 100%; cursor: pointer;">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <i class="fas fa-hand-holding-heart" style="font-size: 4rem; color: #dc3545; margin-bottom: 15px; transition: all 0.3s ease;"></i>
+            </div>
+            <h3 style="color: #dc3545; font-weight: bold; margin-bottom: 15px; text-align: center;">Request Management</h3>
+            <p style="color: #333; line-height: 1.6; text-align: center;">Handle blood requests from recipients quickly. Accept or reject requests efficiently.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Quick Stats Section -->
+      <div class="row" style="margin-bottom: 60px;">
+        <div class="col-12">
+          <div class="card neon-glow" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 245, 245, 0.95) 100%); border-radius: 20px; padding: 40px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);">
+            <h3 style="color: #dc3545; font-weight: bold; text-align: center; margin-bottom: 30px; font-size: 2rem;">Why Choose Our System?</h3>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div style="display: flex; align-items: start;">
+                  <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #dc3545; margin-right: 15px; margin-top: 5px;"></i>
+                  <div>
+                    <h5 style="color: #dc3545; font-weight: bold;">Real-time Updates</h5>
+                    <p style="color: #333; margin: 0;">Get instant notifications about blood requests and inventory changes</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div style="display: flex; align-items: start;">
+                  <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #dc3545; margin-right: 15px; margin-top: 5px;"></i>
+                  <div>
+                    <h5 style="color: #dc3545; font-weight: bold;">Easy Management</h5>
+                    <p style="color: #333; margin: 0;">Simple interface to manage blood inventory and handle requests efficiently</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div style="display: flex; align-items: start;">
+                  <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #dc3545; margin-right: 15px; margin-top: 5px;"></i>
+                  <div>
+                    <h5 style="color: #dc3545; font-weight: bold;">Secure & Reliable</h5>
+                    <p style="color: #333; margin: 0;">Secure platform to manage blood requests and inventory safely</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div style="display: flex; align-items: start;">
+                  <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #dc3545; margin-right: 15px; margin-top: 5px;"></i>
+                  <div>
+                    <h5 style="color: #dc3545; font-weight: bold;">Secure & Reliable</h5>
+                    <p style="color: #333; margin: 0;">Your data is safe and the system is available 24/7 for emergencies</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="container">
+      <nav class="navbar">
+        <div class="hamburger-menu">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+          <div class="line line-3"></div>
+        </div>
+
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="hprofile.php" class="nav-link">
+              <i class="fas fa-user-circle"></i>
+              <span>My Account</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="bloodinfo.php" class="nav-link">
+              <i class="fas fa-tint"></i>
+              <span>Stock of Blood</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="bloodrequest.php" class="nav-link">
+              <i class="fas fa-hand-holding-heart"></i>
+              <span>Blood Requests</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="hospitalrequest.php" class="nav-link">
+              <i class="fas fa-hospital"></i>
+              <span>Hospital to Hospital</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="findnearby.php" class="nav-link">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Find Nearby</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="logout.php" class="nav-link">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+     </nav>
+    </div>
+    
+    <style>
+      .feature-card:hover i {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 10px rgba(220, 53, 69, 0.8));
+      }
+      
+      .feature-card:active {
+        transform: translateY(-2px) scale(0.98);
+      }
+      
+      .feature-card:active i {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 15px rgba(220, 53, 69, 1));
+      }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
